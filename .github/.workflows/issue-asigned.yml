@@ -1,0 +1,21 @@
+# .github/workflows/issue-assigned.yml
+name: "Mover Issue a En Progreso"
+
+on:
+  issues:
+    types: [assigned]
+
+jobs:
+  move-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      projects: write
+      issues: read 
+    steps:
+      - name: Mover issue a "En Progreso"
+        uses: actions/add-to-project@v1.0.1
+        with:
+          project-url: "https://github.com/orgs/open-source-uc/projects/24"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          field-name: "Status"
+          field-value: "In progress"
