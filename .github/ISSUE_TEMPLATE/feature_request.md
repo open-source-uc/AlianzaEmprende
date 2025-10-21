@@ -1,36 +1,20 @@
-name: New feature
-description: Suggest or request a new feature
-labels: ["enhancement"]
-body:
-  - type: markdown
-    attributes:
-      value: |
-        Please fill out the sections below to properly describe the new feature you are suggesting.
-  - type: textarea
-    id: description
-    attributes:
-      label: Describe the feature
-      placeholder: A button in the screen X that allows to do Y
-    validations:
-      required: true
-  - type: textarea
-    id: rationale
-    attributes:
-      label: It should be implemented because
-      placeholder: It will allow to do Y that is needed for Z
-  - type: textarea
-    id: context
-    attributes:
-      label: Additional context
-      placeholder: |
-        Add any other context or screenshots about the feature request here.
-  - type: dropdown
-    id: assign
-    attributes:
-      label: "Would you like to work on this issue?"
-      options:
-        - "Yes"
-  - type: markdown
-    attributes:
-      value: |
-        Thanks for your suggestion! Let's see together if it can be implemented.
+---
+name: Feature request
+about: Suggest an idea for this project
+title: ''
+labels: ''
+assignees: ''
+
+---
+
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional context**
+Add any other context or screenshots about the feature request here.
