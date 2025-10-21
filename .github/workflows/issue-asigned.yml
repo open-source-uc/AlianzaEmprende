@@ -1,20 +1,17 @@
-# .github/workflows/issue-assigned.yml
-name: "Mover Issue a En Progreso"
+# .github/workflows/issue-labeled.yml
+name: "Añadir Issue a Proyecto (por etiqueta)"
 
 on:
   issues:
-    types: [assigned]
+    types: [labeled]
 
 jobs:
-  move-issue:
+  add-to-project:
+    name: "Añadir issue al proyecto"
     runs-on: ubuntu-latest
-    permissions:
-      issues: read 
     steps:
-      - name: Mover issue a "En Progreso"
-        uses: actions/add-to-project@v1.0.1
+      - uses: actions/add-to-project@v1
         with:
           project-url: "https://github.com/orgs/open-source-uc/projects/24"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          field-name: "Status"
-          field-value: "In progress"
+          github-token: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+          labeled: "in-progress"

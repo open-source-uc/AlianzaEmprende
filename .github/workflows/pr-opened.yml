@@ -1,20 +1,16 @@
 # .github/workflows/pr-opened.yml
-name: "Mover PR a In review"
+name: "Añadir PR a Proyecto"
 
 on:
   pull_request:
     types: [opened]
 
 jobs:
-  move-pr:
+  add-to-project:
+    name: "Añadir PR al proyecto"
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
     steps:
-      - name: Mover PR a "In review"
-        uses: actions/add-to-project@v1.0.1
+      - uses: actions/add-to-project@v1
         with:
           project-url: "https://github.com/orgs/open-source-uc/projects/24"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          field-name: "Status"
-          field-value: "In review"
+          github-token: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
