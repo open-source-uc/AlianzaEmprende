@@ -1,59 +1,46 @@
-# Astro Starter Kit: Basics
+# Landing Page: Alianza Emprende
 
-```sh
-npm create astro@latest -- --template basics
-```
+Este es el repositorio para la landing page de la Alianza Emprende.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun\!
+Es un sitio estático construido con **Astro**, estilizado con **Tailwind CSS** y gestionado a través de **Content Collections** de Astro (Markdown).
 
-## 🚀 Project Structure
+## 📝 Gestión de Contenido (Content Collections)
 
-Inside of your Astro project, you'll see the following folders and files:
+Este proyecto no usa base de datos ni CMS. Todo el contenido dinámico (agrupaciones y noticias) se gestiona editando archivos Markdown en la carpeta `src/content/`.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-├── .npmrc
-├── .vscode
-│   └── extensions.json
-└── package.json
-```
+La estructura (campos) que debe tener cada archivo `.md` está definida en `src/content/config.ts`. Si un archivo Markdown no cumple con esa estructura, el proyecto fallará al construir.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+### Para añadir una nueva Agrupación:
 
-## 📦 Package Management
+1.  Crea un nuevo archivo `.md` dentro de `src/content/groups/`.
+2.  Rellena el *frontmatter* (las variables al inicio del archivo) según el *schema* definido en `config.ts`.
 
-This project is configured to use **`npm`** as the required package manager.
+### Para añadir una nueva Noticia:
 
-  * The `package.json` file defines the `"packageManager"` field to enforce a specific `npm` version (e.g., `npm@11.6.2`).
-  * The `.npmrc` file is configured with `save-exact = true`. This ensures that any new packages added with `npm install <package>` are saved with an exact version number (no `^` caret).
+1.  Crea un nuevo archivo `.md` dentro de `src/content/news/`.
+2.  Rellena el *frontmatter* correspondiente.
 
-This setup guarantees that every team member and the production (CI/CD) environment use the exact same dependency versions, preventing "it works on my machine" issues.
+El sitio se reconstruirá y desplegará automáticamente al hacer *push* a la rama principal.
 
-## 🧞 Commands
+## 📦 Gestión de Paquetes
 
-All commands are run from the root of the project, from a terminal:
+Este proyecto está configurado para usar **`npm`** como el gestor de paquetes requerido.
 
-| Command | Action |
+  * El archivo `package.json` define el campo `"packageManager"` para forzar una versión específica de `npm` (ej. `npm@11.6.2`).
+  * El archivo `.npmrc` está configurado con `save-exact = true`. Esto asegura que cualquier paquete nuevo añadido con `npm install <package>` se guarde con un número de versión exacto (sin el símbolo `^`).
+
+Esta configuración garantiza que cada miembro del equipo y el entorno de producción (CI/CD) usen exactamente las mismas versiones de dependencias, previniendo problemas de "en mi máquina funciona".
+
+## 🧞 Comandos
+
+Todos los comandos se ejecutan desde la raíz del proyecto, en una terminal:
+
+| Comando | Acción |
 | :--- | :--- |
-| `npm ci` | **(Initial Install)** Installs dependencies *exactly* from `package-lock.json`. **Use this when cloning the repo for the first time** or in CI/CD. |
-| `npm install` | **(Update/Add)** Synchronizes `node_modules` if `package-lock.json` changed (e.g., after a `git pull`). Also used to **add new packages** (e.g., `npm install react`). |
-| `npm run dev` | Starts local dev server at `localhost:4321` |
-| `npm run build` | Build your production site to `./dist/` |
-| `npm run preview` | Preview your build locally, before deploying |
-| `npm run astro ...` | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI |
+| `npm ci` | **(Instalación Inicial)** Instala las dependencias *exactamente* desde `package-lock.json`. **Usa esto al clonar el repo por primera vez** o en CI/CD. |
+| `npm install` | **(Actualizar/Añadir)** Sincroniza `node_modules` si `package-lock.json` cambió (ej. después de un `git pull`). También se usa para **añadir nuevos paquetes** (ej. `npm install react`). |
+| `npm run dev` | Inicia el servidor de desarrollo local en `localhost:4321` |
+| `npm run build` | Compila tu sitio de producción en `./dist/` |
+| `npm run preview` | Previsualiza tu sitio compilado localmente, antes de desplegar |
+| `npm run astro ...` | Ejecuta comandos CLI como `astro add`, `astro check` |
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
