@@ -9,7 +9,6 @@ jobs:
   move-pr:
     runs-on: ubuntu-latest
     permissions:
-      projects: write
       pull-requests: read
     steps:
       - name: Mover PR a "In review"

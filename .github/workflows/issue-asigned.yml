@@ -9,7 +9,6 @@ jobs:
   move-issue:
     runs-on: ubuntu-latest
     permissions:
-      projects: write
       issues: read 
     steps:
       - name: Mover issue a "En Progreso"
