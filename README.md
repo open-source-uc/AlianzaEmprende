@@ -20,6 +20,11 @@ La estructura (campos) que debe tener cada archivo `.md` está definida en `src/
 1.  Crea un nuevo archivo `.md` dentro de `src/content/news/`.
 2.  Rellena el *frontmatter* correspondiente.
 
+### Para añadir un nuevo Evento:
+
+1.  Crea un nuevo archivo `.md` dentro de `src/content/events/`.
+2.  Relenna el *frontmatter* correspondiente.
+
 El sitio se reconstruirá y desplegará automáticamente al hacer *push* a la rama principal.
 
 ## 📦 Gestión de Paquetes
