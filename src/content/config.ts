@@ -5,8 +5,8 @@ const groups = defineCollection({
     schema: z.object({
         title: z.string(),
         logo: z.string().url(),
-        website: z.string().url(),
-        socials: z.record(z.string())
+        website: z.string().url().optional(),
+        socials: z.record(z.string()).optional()
 
     }),
 
