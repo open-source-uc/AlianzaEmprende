@@ -4,28 +4,23 @@ Este es el repositorio para la landing page de la Alianza Emprende.
 
 Es un sitio estático construido con **Astro**, estilizado con **Tailwind CSS** y gestionado a través de **Content Collections** de Astro (Markdown).
 
-## 📝 Gestión de Contenido (Content Collections)
+## 📝 Gestión de Contenido
 
-Este proyecto no usa base de datos ni CMS. Todo el contenido dinámico (agrupaciones y noticias) se gestiona editando archivos Markdown en la carpeta `src/content/`.
+Todo el contenido del sitio (agrupaciones, noticias y eventos) se gestiona a través de archivos de texto simples. No necesitas saber programar para agregar o editar contenido.
 
-La estructura (campos) que debe tener cada archivo `.md` está definida en `src/content/config.ts`. Si un archivo Markdown no cumple con esa estructura, el proyecto fallará al construir.
+**📖 [Guía completa: Cómo agregar y editar contenido](src/content/README.md)**
 
-### Para añadir una nueva Agrupación:
+> **👨‍💻 ¿Eres desarrollador?** La información técnica sobre schemas y la implementación está al final del [README de content](src/content/README.md#-información-técnica-para-desarrolladores).
 
-1.  Crea un nuevo archivo `.md` dentro de `src/content/groups/`.
-2.  Rellena el *frontmatter* (las variables al inicio del archivo) según el *schema* definido en `config.ts`.
+### ¿Qué puedes hacer?
 
-### Para añadir una nueva Noticia:
+- ✏️ **Agregar una nueva agrupación** a la alianza
+- 📰 **Publicar noticias** o artículos
+- 📅 **Anunciar eventos** próximos
 
-1.  Crea un nuevo archivo `.md` dentro de `src/content/news/`.
-2.  Rellena el *frontmatter* correspondiente.
+Cada tipo de contenido tiene su propia carpeta dentro de `src/content/` y ejemplos que puedes copiar y modificar. La guía completa te explica paso a paso qué información necesitas incluir en cada caso.
 
-### Para añadir un nuevo Evento:
-
-1.  Crea un nuevo archivo `.md` dentro de `src/content/events/`.
-2.  Relenna el *frontmatter* correspondiente.
-
-El sitio se reconstruirá y desplegará automáticamente al hacer *push* a la rama principal.
+Una vez que subas tus cambios, el sitio se actualizará automáticamente.
 
 ## 📦 Gestión de Paquetes
 

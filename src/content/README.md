@@ -1,28 +1,36 @@
-# Gestión de Contenido (Content Collections)
+# Guía para Agregar Contenido
 
-Este proyecto utiliza **Astro Content Collections** para gestionar todo el contenido dinámico del sitio. El "cerebro" de esta gestión se encuentra en `src/content/config.ts`, que define las estructuras (schemas) que cada tipo de contenido debe seguir.
+Esta guía te ayudará a agregar y editar contenido en el sitio web de la Alianza Emprende. No necesitas saber programar, solo seguir estos ejemplos.
 
-Todo el contenido se escribe en archivos Markdown (`.md`) dentro de carpetas específicas en `src/content/`.
+> **👨‍💻 ¿Eres desarrollador?** Si buscas información técnica sobre los schemas y la implementación, ve directamente a la [sección técnica al final de este documento](#-información-técnica-para-desarrolladores).
 
-## Colecciones Definidas
+## ¿Cómo funciona?
 
-El proyecto tiene tres colecciones: `groups`, `news`, y `events`.
+El contenido del sitio se gestiona mediante archivos de texto que tienen:
+1. **Una sección de información** (entre `---`) donde pones datos como título, fecha, etc.
+2. **El contenido principal** donde escribes el texto que se mostrará en el sitio
+
+Hay tres tipos de contenido que puedes crear:
 
 -----
 
-### 1\. Agrupaciones (`groups`)
+## 📁 1. Agrupaciones
 
-Esta colección representa a cada organización, agrupación o miembro que forma parte de la alianza.
+Usa esto para agregar una nueva organización o agrupación a la alianza.
 
-  * **Ubicación:** `src/content/groups/`
-  * **Schema (Campos Requeridos):**
-      * `title` (string): El nombre oficial de la agrupación.
-      * `logo` (string): Una URL *completa* y válida (ej. `https://.../logo.png`) que apunta al logo de la agrupación.
-  * **Schema (Campos Opcionales):**
-      * `website` (string): La URL del sitio web principal de la agrupación.
-      * `socials` (objeto): Un objeto para redes sociales, donde la llave es el nombre de la red (ej. `instagram`) y el valor es la URL.
+**¿Dónde crear el archivo?** → En la carpeta `src/content/groups/`  
+**Nombre del archivo:** El nombre que quieras (sin espacios), por ejemplo: `mi-agrupacion.md`
 
-**Ejemplo de Markdown (`src/content/groups/open-source-uc.md`):**
+### ¿Qué información necesitas?
+
+- **title:** El nombre oficial de la agrupación
+- **logo:** La dirección web (URL) del logo (debe empezar con `https://`)
+- **website:** *(opcional)* La dirección del sitio web
+- **socials:** *(opcional)* Links a redes sociales
+
+### Ejemplo completo
+
+Crea un archivo llamado `open-source-uc.md` con este contenido:
 
 ```markdown
 ---
@@ -34,24 +42,30 @@ socials:
   github: "https://github.com/open-source-uc"
 ---
 
-Esta es la descripción de Open Source UC, que irá en el cuerpo del archivo Markdown.
-Se utiliza para la vista de "detalle" de la agrupación.
+Esta es la descripción de Open Source UC.
+Aquí puedes escribir todo lo que quieras sobre la agrupación.
+Puedes usar **negritas**, *cursivas*, y más.
 ```
 
 -----
 
-### 2\. Noticias (`news`)
+## 📰 2. Noticias
 
-Esta colección maneja las entradas del blog o artículos de noticias.
+Usa esto para publicar artículos o noticias sobre la alianza.
 
-  * **Ubicación:** `src/content/news/`
-  * **Schema (Campos Requeridos):**
-      * `title` (string): El título del artículo.
-      * `description` (string): Un resumen corto o descripción para vistas previas.
-      * `pubDate` (date): La fecha de publicación (usar formato `YYYY-MM-DD`).
-      * `author` (string): El nombre del autor.
+**¿Dónde crear el archivo?** → En la carpeta `src/content/news/`  
+**Nombre del archivo:** El nombre que quieras (sin espacios), por ejemplo: `lanzamiento-sitio.md`
 
-**Ejemplo de Markdown (`src/content/news/lanzamiento-v1.md`):**
+### ¿Qué información necesitas?
+
+- **title:** El título de la noticia
+- **description:** Un resumen corto (aparece en las vistas previas)
+- **pubDate:** La fecha de publicación en formato `YYYY-MM-DD` (año-mes-día)
+- **author:** El nombre de quien escribe
+
+### Ejemplo completo
+
+Crea un archivo llamado `lanzamiento-v1.md` con este contenido:
 
 ```markdown
 ---
@@ -61,23 +75,29 @@ pubDate: "2025-10-27"
 author: "Equipo Alianza"
 ---
 
-¡Hoy es el gran día! El cuerpo de la noticia va aquí.
-Este contenido se renderizará en la página de detalle del post.
+¡Hoy es el gran día! Aquí va el contenido completo de la noticia.
+
+Puedes escribir varios párrafos, agregar enlaces, listas, etc.
 ```
 
 -----
 
-### 3\. Eventos (`events`)
+## 📅 3. Eventos
 
-Esta colección se usa para listar eventos (futuros o pasados).
+Usa esto para anunciar eventos próximos o documentar eventos pasados.
 
-  * **Ubicación:** `src/content/events/`
-  * **Schema (Campos Requeridos):**
-      * `title` (string): El nombre del evento.
-      * `date` (date): La fecha del evento (usar formato `YYYY-MM-DD`).
-      * `place` (string): El lugar donde se realizará (físico o virtual).
+**¿Dónde crear el archivo?** → En la carpeta `src/content/events/`  
+**Nombre del archivo:** El nombre que quieras (sin espacios), por ejemplo: `charla-innovacion.md`
 
-**Ejemplo de Markdown (`src/content/events/charla-astro.md`):**
+### ¿Qué información necesitas?
+
+- **title:** El nombre del evento
+- **date:** La fecha del evento en formato `YYYY-MM-DD` (año-mes-día)
+- **place:** El lugar donde se realizará (puede ser presencial o un link a Zoom)
+
+### Ejemplo completo
+
+Crea un archivo llamado `charla-astro.md` con este contenido:
 
 ```markdown
 ---
@@ -86,5 +106,43 @@ date: "2025-11-15"
 place: "Auditorio San Agustín, Campus San Joaquín"
 ---
 
-Descripción detallada del evento.
+En esta charla aprenderemos los conceptos básicos de Astro.
+
+¡Todos están invitados! Inscripciones en el siguiente link: ...
 ```
+
+-----
+
+## 💡 Consejos útiles
+
+- **Fechas:** Siempre usa el formato `YYYY-MM-DD` (ejemplo: `2025-10-27`)
+- **URLs:** Deben ser completas y empezar con `https://`
+- **Nombres de archivo:** Sin espacios, usa guiones: `mi-archivo.md` ✅, no `mi archivo.md` ❌
+- **La sección entre `---`:** Respeta la indentación (espacios al inicio) especialmente en `socials`
+
+-----
+
+## 🔧 Información Técnica (Para Desarrolladores)
+
+Este proyecto utiliza **Astro Content Collections**. La estructura (schema) de cada colección está definida en `src/content/config.ts`.
+
+### Schemas Definidos:
+
+**`groups` Collection:**
+- `title` (string, requerido)
+- `logo` (string URL, requerido)
+- `website` (string URL, opcional)
+- `socials` (record<string, string>, opcional)
+
+**`news` Collection:**
+- `title` (string, requerido)
+- `description` (string, requerido)
+- `pubDate` (date, requerido)
+- `author` (string, requerido)
+
+**`events` Collection:**
+- `title` (string, requerido)
+- `date` (date, requerido)
+- `place` (string, requerido)
+
+Si necesitas modificar los schemas o agregar nuevos campos, edita `src/content/config.ts`.
