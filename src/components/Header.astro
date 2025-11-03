@@ -1,14 +1,22 @@
 
-<header class="flex items-center justify-between py-6 px-16 shadow gap-48">
+<header class="sticky top-0 flex items-center justify-between py-6 px-4 md:px-8 lg:px-16 shadow bg-white z-50">
     <div>
         <!-- logo temporal hasta tener una de mejor calidad -->
         <a href="/">
             <img src="/logo-placeholder.jpeg" alt="Logo" class="size-14">
         </a>
     </div>
-    <nav class="flex gap-12 text-lg font-bold">
-        <a href="/" class="transition hover:text-blue-500">Inicio</a>
-        <a href="/agrupaciones" class="transition hover:text-blue-500">Agrupaciones</a>
-        <a href="/noticias" class="transition hover:text-blue-500">Noticias</a>
+    <input type="checkbox" id="menu-toggle" class="hidden peer/menu-toggle">
+    <label for="menu-toggle" class="md:hidden cursor-pointer z-50 relative">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </label>
+    <nav class="fixed md:static top-0 -right-full md:right-0 h-screen md:h-auto w-4/5 md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none transition-all duration-300 ease-in-out peer-checked/menu-toggle:right-0 z-40">
+        <ul class="flex flex-col md:flex-row gap-6 md:gap-12 font-bold p-6 md:p-0 pt-20 md:pt-0 [&>li>a]:transition [&>li>a]:hover:text-blue-500 [&>li>a]:block [&>li>a]:py-2 md:[&>li>a]:py-0 [&>li>a]:text-2xl md:[&>li>a]:text-lg">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/agrupaciones">Agrupaciones</a></li>
+            <li><a href="/noticias">Noticias</a></li>
+        </ul>
     </nav>
 </header>
