@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro'
+/* Importar Layout noticias [PENDIENTE] */
+
+export async function getStaticPaths() {
+    const news = await getCollection('news');
+    return news.map(noticia => ({
+        params: { slug: noticia.slug },
+        props: { noticia },
+    }));
+}
+
+const { noticia } = Astro.props;
+const { data } = noticia
+const { title, author, pubDate } = data
+const { Content } = await render(noticia);
+---
+
+<Layout title={title}>
+    <div class="p-4">
+        <h1 class="mb-5 text-4xl font-bold">Titulo: {title}</h1>
+        <p class="mb-2"><em class="font-bold">Autor:</em> {author}</p>
+        <p class="mb-2"><em class="font-bold">Fecha:</em> {pubDate}</p>
+        <Content/>
+    </div>
+</Layout>
