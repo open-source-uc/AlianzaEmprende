@@ -3,6 +3,31 @@ import Layout from "@layouts/Layout.astro";
 import ButtonLink from "@components/ButtonLink.astro";
 import Card from "@/components/Card.astro";
 import BlobBackground from "@/components/BlobBackground.astro";
+
+import InfiniteCarousel from "@/components/InfiniteCarousel.astro";
+
+const sponsors = [
+    {
+        name: "Unite UC",
+        logo: "https://ugc.production.linktr.ee/01fb466f-7c00-4c0e-b6fa-b9b364be948d_Imagen-de-WhatsApp-2025-05-01-a-las-14.26.31-ed87e699.jpeg?io=true&size=avatar-v3_0",
+    },
+    {
+        name: "Open Source UC",
+        logo: "https://avatars.githubusercontent.com/u/26145246?s=200&v=4",
+    },
+    {
+        name: "Sponsor 3",
+        logo: "https://picsum.photos/200",
+    },
+    {
+        name: "Sponsor 4",
+        logo: "https://picsum.photos/201",
+    },
+    {
+        name: "Sponsor 5",
+        logo: "https://picsum.photos/202",
+    },
+];
 ---
 
 <Layout
@@ -12,7 +37,7 @@ import BlobBackground from "@/components/BlobBackground.astro";
     <BlobBackground />
     <main class="flex flex-col px-4 sm:px-8 lg:px-20">
         <section
-            class="py-10 md:py-20 lg:py-35 flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-12"
+            class="py-10 md:py-20 lg:py-30 flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-12"
             id="hero"
         >
             <div
@@ -29,7 +54,7 @@ import BlobBackground from "@/components/BlobBackground.astro";
                     Buscamos generar un ecosistema de apoyo que supla la
                     totalidad de las necesidades del joven emprendedor.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 text-center">
+                <div class="flex flex-row gap-4 text-center">
                     <ButtonLink label="Sé Parte" href="/join" />
                     <ButtonLink
                         label="Conoce Mas"
@@ -44,7 +69,13 @@ import BlobBackground from "@/components/BlobBackground.astro";
                 class="w-full lg:w-1/2 max-w-2xl lg:max-w-4xl h-auto object-cover rounded-lg"
             />
         </section>
-
+        <section
+            id="sponsors"
+            class="flex flex-col justify-center align-middle text-center gap-10 p-10"
+        >
+            <h1 class="text-2xl font-bold">Nuestros sponsors son:</h1>
+            <InfiniteCarousel sponsors={sponsors} />
+        </section>
         <section
             id="valores"
             class="flex flex-col lg:flex-row justify-between gap-6 py-10 md:py-16"
