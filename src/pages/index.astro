@@ -8,24 +8,24 @@ import InfiniteCarousel from "@/components/InfiniteCarousel.astro";
 
 const sponsors = [
     {
-        name: "Unite UC",
-        logo: "https://ugc.production.linktr.ee/01fb466f-7c00-4c0e-b6fa-b9b364be948d_Imagen-de-WhatsApp-2025-05-01-a-las-14.26.31-ed87e699.jpeg?io=true&size=avatar-v3_0",
-    },
-    {
-        name: "Open Source UC",
-        logo: "https://avatars.githubusercontent.com/u/26145246?s=200&v=4",
-    },
-    {
-        name: "Sponsor 3",
+        name: "Sponsor 1",
         logo: "https://picsum.photos/200",
     },
     {
-        name: "Sponsor 4",
+        name: "Sponsor 2",
         logo: "https://picsum.photos/201",
     },
     {
-        name: "Sponsor 5",
+        name: "Sponsor 3",
         logo: "https://picsum.photos/202",
+    },
+    {
+        name: "Sponsor 4",
+        logo: "https://picsum.photos/203",
+    },
+    {
+        name: "Sponsor 5",
+        logo: "https://picsum.photos/204",
     },
 ];
 ---
@@ -73,7 +73,7 @@ const sponsors = [
             id="sponsors"
             class="flex flex-col justify-center align-middle text-center gap-10 p-10"
         >
-            <h1 class="text-2xl font-bold">Nuestros sponsors son:</h1>
+            <h1 class="text-2xl font-bold">Nuestros aliados son:</h1>
             <InfiniteCarousel sponsors={sponsors} />
         </section>
         <section

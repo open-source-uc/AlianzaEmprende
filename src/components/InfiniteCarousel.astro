@@ -21,11 +21,13 @@ while (repeatedSponsors.length < minItems) {
         <div class="flex *:shrink-0 *:grow-0 *:basis-40 carousel pr-5 gap-5">
             {
                 repeatedSponsors.map((s) => (
-                    <img
-                        src={s.logo}
-                        alt={s.name}
-                        class="h-32 w-auto object-contain"
-                    />
+                    <div class="p-5">
+                        <img
+                            src={s.logo}
+                            alt={s.name}
+                            class="h-24 md:h-32 w-auto object-contain hover:scale-105 transition-transform duration-100"
+                        />
+                    </div>
                 ))
             }
         </div>
@@ -35,11 +37,13 @@ while (repeatedSponsors.length < minItems) {
         >
             {
                 repeatedSponsors.map((s) => (
-                    <img
-                        src={s.logo}
-                        alt={s.name}
-                        class="h-32 w-auto object-contain"
-                    />
+                    <div class="p-5">
+                        <img
+                            src={s.logo}
+                            alt={s.name}
+                            class="h-24 md:h-32 w-auto object-contain hover:scale-105 transition-transform duration-100"
+                        />
+                    </div>
                 ))
             }
         </div>
@@ -65,7 +69,7 @@ while (repeatedSponsors.length < minItems) {
     }
 
     .carousel {
-        animation: carousel-spin 10s linear infinite;
+        animation: carousel-spin 20s linear infinite;
     }
 
     @keyframes carousel-spin {
