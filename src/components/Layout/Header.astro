@@ -1,5 +1,10 @@
+---
+import ButtonLink from "../ButtonLink.astro";
+---
+
 <header
-    class="sticky top-0 flex items-center justify-between py-6 px-4 md:px-6 z-50"
+    id="main-header"
+    class="sticky top-0 flex items-center justify-between py-6 px-4 md:px-6 z-50 transition-colors duration-300"
 >
     <div
         class="flex items-center justify-between flex-1 md:justify-start gap-6"
@@ -25,6 +30,11 @@
                 <li><a href="/eventos">Eventos</a></li>
                 <li><a href="/recursos">Recursos</a></li>
                 <li><a href="/about">Acerca</a></li>
+                <ButtonLink
+                    label="Sé Parte"
+                    href="/join"
+                    classname="text-center md:hidden"
+                />
             </ul>
         </nav>
         <label for="menu-toggle" class="md:hidden cursor-pointer z-50 relative">
@@ -43,9 +53,25 @@
             </svg>
         </label>
     </div>
-    <button
-        class="hidden md:flex w-t bg-blue-400 py-2 px-4 rounded-xl text-white font-bold"
-    >
-        Sé parte
-    </button>
+    <ButtonLink label="Sé Parte" href="/join" classname="hidden md:inline" />
 </header>
+
+<script>
+    const header = document.getElementById("main-header");
+
+    function handleScroll() {
+        if (window.scrollY > 50) {
+            header?.classList.add("bg-white", "shadow-md");
+            header?.classList.remove("bg-transparent");
+        } else {
+            header?.classList.add("bg-transparent");
+            header?.classList.remove("bg-white", "shadow-md");
+        }
+    }
+
+    // Ejecutar al cargar la página
+    handleScroll();
+
+    // Ejecutar al hacer scroll
+    window.addEventListener("scroll", handleScroll);
+</script>
