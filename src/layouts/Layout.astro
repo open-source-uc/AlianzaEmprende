@@ -6,9 +6,10 @@ import Footer from "@/components/Layout/Footer.astro";
 interface Props {
     title?: string;
     description?: string;
+    classname?: string;
 }
 
-const { title = "Alianza Emprende", description } = Astro.props;
+const { title = "Alianza Emprende", description, classname } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,7 +20,7 @@ const { title = "Alianza Emprende", description } = Astro.props;
         <title>{title}</title>
         <meta name="description" content={description} />
     </head>
-    <body class="relative">
+    <body class=`relative ${classname}` }>
         <Header />
         <slot />
         <Footer />

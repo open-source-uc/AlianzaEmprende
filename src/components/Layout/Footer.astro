@@ -1,25 +1,30 @@
 ---
-import GitHubIcon from "@icons/GitHubIcon.astro"
-import InstagramIcon from "@icons/InstagramIcon.astro"
-import LinkedinIcon from "@icons/LinkedinIcon.astro"
+import GitHubIcon from "@icons/GitHubIcon.astro";
+import InstagramIcon from "@icons/InstagramIcon.astro";
+import LinkedinIcon from "@icons/LinkedinIcon.astro";
 ---
 
-<footer class="py-4 px-8 shadow">
-    <div class="flex justify-between items-center ">
+<footer class="py-6 px-8 bg-white shadow-inner">
+    <div class="flex justify-between items-center">
         <div class="flex gap-3">
             <a href="https://github.com/open-source-uc" target="_blank">
-            <GitHubIcon className="size-6 transition hover:scale-110" />
+                <GitHubIcon className="size-6 transition hover:scale-110" />
             </a>
             <a href="https://www.instagram.com/osuc.dev/" target="_blank">
-            <InstagramIcon className="size-6 transition hover:scale-110" />
+                <InstagramIcon className="size-6 transition hover:scale-110" />
             </a>
-            <a href="https://www.linkedin.com/company/open-source-euc" target="_blank">
-            <LinkedinIcon className="size-6 transition hover:scale-110" />
+            <a
+                href="https://www.linkedin.com/company/open-source-euc"
+                target="_blank"
+            >
+                <LinkedinIcon className="size-6 transition hover:scale-110" />
             </a>
         </div>
         <div class="text-right">
             <a href="https://osuc.dev/">
-            <p class="text-sm text-gray-400 transition hover:contrast-200">Desarrollado por OpenSourceUC</p>
+                <p class="text-sm transition hover:contrast-200">
+                    Desarrollado por OpenSourceUC
+                </p>
             </a>
         </div>
     </div>

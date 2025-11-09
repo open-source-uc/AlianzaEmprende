@@ -1,0 +1,16 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ButtonLink from "@/components/ButtonLink.astro";
+---
+
+<Layout title="Error 404" classname="flex flex-col h-screen">
+    <main
+        class="flex-1 flex flex-col items-center text-center px-4 justify-center"
+    >
+        <h1 class="text-6xl font-bold mb-4">404</h1>
+        <p class="text-xl mb-8">
+            Lo sentimos, la página que buscas no se pudo encontrar.
+        </p>
+        <ButtonLink label="Volver al inicio" href="/" />
+    </main>
+</Layout>
