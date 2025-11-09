@@ -1,5 +1,12 @@
 @import "tailwindcss";
+@import '@fontsource-variable/instrument-sans';
 
-html, body {
-    height: 100%;
+
+@theme {
+    --font-sans: "Instrument Sans Variable", sans-serif;
+}
+
+html,
+body {
+    min-height: 100%;
 }

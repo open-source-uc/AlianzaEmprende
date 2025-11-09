@@ -1,14 +1,15 @@
 ---
-interface Props {
-    title?: string;
-    description?: string;
-}
-
 import "@/styles/global.css";
 import Header from "@/components/Layout/Header.astro";
 import Footer from "@/components/Layout/Footer.astro";
 
-const { title = "Alianza Emprende", description } = Astro.props;
+interface Props {
+    title?: string;
+    description?: string;
+    classname?: string;
+}
+
+const { title = "Alianza Emprende", description, classname } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,9 +19,8 @@ const { title = "Alianza Emprende", description } = Astro.props;
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{title}</title>
         <meta name="description" content={description} />
-        <link href="css/style.css" rel="stylesheet" />
     </head>
-    <body>
+    <body class=`relative ${classname}` }>
         <Header />
         <slot />
         <Footer />
