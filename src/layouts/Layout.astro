@@ -1,22 +1,28 @@
 ---
+import "@/styles/global.css";
+import Header from "@/components/Layout/Header.astro";
+import Footer from "@/components/Layout/Footer.astro";
+
 interface Props {
-	title?: string
+    title?: string;
+    description?: string;
+    classname?: string;
 }
 
-import "@/styles/global.css"
-
-const {title} = Astro.props
+const { title = "Alianza Emprende", description, classname } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>{title}</title>
-		<link href="css/style.css" rel="stylesheet">
-	</head>
-	<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+    </head>
+    <body class=`relative ${classname}` }>
+        <Header />
         <slot />
-	</body>
+        <Footer />
+    </body>
 </html>

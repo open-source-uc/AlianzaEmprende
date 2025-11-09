@@ -1,0 +1,30 @@
+---
+import MedallaIcon from "./Icons/MedallaIcon.astro";
+import RocketIcon from "./Icons/RocketIcon.astro";
+import PeopleIcon from "./Icons/PeopleIcon.astro";
+
+interface Props {
+    title: string;
+    text: string;
+    icon?: "rocket" | "medalla" | "people";
+}
+
+const icons = {
+    rocket: RocketIcon,
+    medalla: MedallaIcon,
+    people: PeopleIcon,
+};
+
+const { title, text, icon = "rocket" } = Astro.props;
+const IconComponent = icons[icon];
+---
+
+<div
+    class="border rounded-lg bg-white border-gray-200 w-full flex flex-col justify-between p-6 sm:p-8 gap-8 xl:gap-20 shadow shadow-gray-400"
+>
+    <IconComponent />
+    <div class="">
+        <h2 class="text-xl font-semibold mb-2">{title}</h2>
+        <p class="text-sm sm:text-base">{text}</p>
+    </div>
+</div>

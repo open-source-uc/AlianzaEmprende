@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource-variable/instrument-sans": "5.2.8",
     "@tailwindcss/vite": "4.1.15",
     "astro": "5.14.7",
     "tailwindcss": "4.1.15"
