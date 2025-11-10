@@ -22,6 +22,18 @@ Cada tipo de contenido tiene su propia carpeta dentro de `src/content/` y ejempl
 
 Una vez que subas tus cambios, el sitio se actualizará automáticamente.
 
+## 🖼️ Imágenes Open Graph
+
+Las noticias generan automáticamente imágenes optimizadas para compartir en redes sociales (Open Graph / Twitter Cards) durante el proceso de build. Estas imágenes incluyen el título de la noticia sobre un fondo personalizado.
+
+**🔧 [Documentación técnica: Implementación de Open Graph](src/docs/open-graph-implementation.md)**
+
+Esta documentación detalla:
+- Arquitectura y flujo de generación de imágenes
+- Componentes y utilidades utilizados
+- Configuración y uso
+- Troubleshooting de problemas comunes
+
 ## 📦 Gestión de Paquetes
 
 Este proyecto está configurado para usar **`npm`** como el gestor de paquetes requerido.
