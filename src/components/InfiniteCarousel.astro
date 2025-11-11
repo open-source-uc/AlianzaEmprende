@@ -1,0 +1,83 @@
+---
+interface Props {
+    sponsors: {
+        name: string;
+        logo: string;
+    }[];
+}
+const { sponsors } = Astro.props;
+
+const minItems = 10;
+let repeatedSponsors = [...sponsors];
+while (repeatedSponsors.length < minItems) {
+    repeatedSponsors = [...repeatedSponsors, ...sponsors];
+}
+---
+
+<div class="relative overflow-hidden">
+    <div
+        class="flex overflow-auto [&::-webkit-scrollbar]:hidden carousel-container"
+    >
+        <div class="flex *:shrink-0 *:grow-0 *:basis-40 carousel pr-5 gap-5">
+            {
+                repeatedSponsors.map((s) => (
+                    <div class="p-5">
+                        <img
+                            src={s.logo}
+                            alt={s.name}
+                            class="h-24 md:h-32 w-auto object-contain hover:scale-105 transition-transform duration-100"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+        <div
+            aria-hidden
+            class="flex *:shrink-0 *:grow-0 *:basis-40 carousel pr-5 gap-5"
+        >
+            {
+                repeatedSponsors.map((s) => (
+                    <div class="p-5">
+                        <img
+                            src={s.logo}
+                            alt={s.name}
+                            class="h-24 md:h-32 w-auto object-contain hover:scale-105 transition-transform duration-100"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .carousel-container {
+        mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 10%,
+            black 90%,
+            transparent
+        );
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 10%,
+            black 90%,
+            transparent
+        );
+    }
+
+    .carousel {
+        animation: carousel-spin 20s linear infinite;
+    }
+
+    @keyframes carousel-spin {
+        from {
+            translate: 0;
+        }
+        to {
+            translate: -100%;
+        }
+    }
+</style>

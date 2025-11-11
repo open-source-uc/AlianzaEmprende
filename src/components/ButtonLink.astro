@@ -2,6 +2,7 @@
 interface Props {
     label: string;
     href: string;
+    bold?: boolean;
     classname?: string;
     disabled?: boolean;
     theme?: "primary" | "secondary";
@@ -11,6 +12,7 @@ interface Props {
 const {
     label,
     href,
+    bold = false,
     classname,
     disabled = false,
     theme = "primary",
@@ -18,13 +20,12 @@ const {
 
 const themes = {
     primary: "bg-blue-600 text-white hover:bg-blue-800",
-    secondary:
-        "text-blue-600 border border-blue-500 hover:bg-blue-700 hover:text-white",
+    secondary: `text-blue-600 border border-blue-600 hover:bg-blue-700 hover:text-white ${bold ? "border-2" : ""}`,
 };
 ---
 
 <a
-    class={`px-4 py-2 rounded-xl hover:disabled:opacity-50 ${themes[theme]} ${disabled ? "pointer-events-none" : ""} ${classname}`}
+    class={`px-4 py-2 rounded-xl hover:disabled:opacity-50 ${themes[theme]} ${disabled ? "pointer-events-none" : ""} ${bold ? "font-bold" : ""} ${classname}`}
     href={href}
 >
     {label}
