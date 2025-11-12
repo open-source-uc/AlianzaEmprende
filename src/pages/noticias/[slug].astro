@@ -1,6 +1,7 @@
 ---
+
 import { getCollection, render } from 'astro:content';
-import Layout from '../../layouts/Layout.astro'
+import Layout from '../../layouts/Layout.astro';
 /* Importar Layout noticias [PENDIENTE] */
 
 export async function getStaticPaths() {
@@ -11,17 +12,26 @@ export async function getStaticPaths() {
     }));
 }
 
+const options: Intl.DateTimeFormatOptions = {
+  day: '2-digit',
+  month: '2-digit',
+  year: '2-digit',
+};
+
 const { noticia } = Astro.props;
-const { data } = noticia
-const { title, author, pubDate } = data
+const { data } = noticia;
+const { title, author, pubDate } = data;
 const { Content } = await render(noticia);
+
+const ogImageUrl = new URL(`/noticias/og/${noticia.slug}.png`, Astro.site).toString();
 ---
 
 <Layout title={title}>
-    <div class="p-4">
-        <h1 class="mb-5 text-4xl font-bold">Titulo: {title}</h1>
-        <p class="mb-2"><em class="font-bold">Autor:</em> {author}</p>
-        <p class="mb-2"><em class="font-bold">Fecha:</em> {pubDate}</p>
+    <div class="mx-auto p-4 md:w-[80vw]">
+        <img src={ogImageUrl} alt="">
+        <h1 class="text-news-title mb-5 text-4xl font-bold">Titulo: {title}</h1>
+        <p class="mb-2"><span class="text-news-label font-bold">Autor:</span> {author}</p>
+        <p class="mb-2"><span class="text-news-label font-bold">Fecha:</span> {new Intl.DateTimeFormat('es-ES', options).format(pubDate).replace(/\//g, '-')}</p>
         <Content/>
     </div>
 </Layout>

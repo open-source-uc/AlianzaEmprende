@@ -4,6 +4,10 @@
 
 @theme {
     --font-sans: "Instrument Sans Variable", sans-serif;
+    --color-news-link: oklch(0.5089 0.099 243.9);
+    --color-news-title: oklch(0.2555 0.0672 269.23);
+    --color-news-text: oklch(0.3874 0.0378 266.59);
+    --color-news-label: oklch(0.5089 0.099 243.9);
 }
 
 html,
