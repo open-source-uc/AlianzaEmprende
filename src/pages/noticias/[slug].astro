@@ -1,37 +1,168 @@
 ---
-
-import { getCollection, render } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-/* Importar Layout noticias [PENDIENTE] */
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import BlobBackground from "@/components/BlobBackground.astro";
 
 export async function getStaticPaths() {
-    const news = await getCollection('news');
-    return news.map(noticia => ({
+    const news = await getCollection("news");
+    return news.map((noticia) => ({
         params: { slug: noticia.slug },
         props: { noticia },
     }));
 }
 
 const options: Intl.DateTimeFormatOptions = {
-  day: '2-digit',
-  month: '2-digit',
-  year: '2-digit',
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    timeZone: "UTC",
 };
 
 const { noticia } = Astro.props;
 const { data } = noticia;
-const { title, author, pubDate } = data;
+const { title, author, pubDate, description } = data;
 const { Content } = await render(noticia);
 
-const ogImageUrl = new URL(`/noticias/og/${noticia.slug}.png`, Astro.site).toString();
+const formattedDate = new Intl.DateTimeFormat("es-CL", options)
+    .format(pubDate)
+    .replace(/\//g, "-");
+
+const ogImageUrl = new URL(
+    `/noticias/og/${noticia.slug}.png`,
+    Astro.site,
+).toString();
 ---
 
 <Layout title={title}>
-    <div class="mx-auto p-4 md:w-[80vw]">
-        <img src={ogImageUrl} alt="">
-        <h1 class="text-news-title mb-5 text-4xl font-bold">Titulo: {title}</h1>
-        <p class="mb-2"><span class="text-news-label font-bold">Autor:</span> {author}</p>
-        <p class="mb-2"><span class="text-news-label font-bold">Fecha:</span> {new Intl.DateTimeFormat('es-ES', options).format(pubDate).replace(/\//g, '-')}</p>
-        <Content/>
-    </div>
+    <meta slot="head" property="og:title" content={title} />
+    <meta slot="head" property="og:description" content={description} />
+    <meta slot="head" property="og:image" content={ogImageUrl} />
+    <meta slot="head" property="og:type" content="article" />
+    <meta slot="head" name="twitter:card" content="summary_large_image" />
+    <meta slot="head" name="twitter:title" content={title} />
+    <meta slot="head" name="twitter:description" content={description} />
+    <meta slot="head" name="twitter:image" content={ogImageUrl} />
+
+    <BlobBackground />
+
+    <article class="mx-auto my-8 lg:w-[65vw] w-[92vw]">
+        <!-- Breadcrumb / Back navigation -->
+        <nav class="mb-6" aria-label="Breadcrumb">
+            <a
+                href="/noticias"
+                class="text-news-label hover:text-news-title transition-colors inline-flex items-center gap-2"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+                Volver a Noticias
+            </a>
+        </nav>
+
+        <!-- Hero Image -->
+        <figure class="mb-8">
+            <img
+                src={ogImageUrl}
+                alt={title}
+                class="w-full h-auto rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.30)] object-cover"
+            />
+        </figure>
+
+        <!-- Article Header -->
+        <header class="mb-8">
+            <h1
+                class="text-[36px]/10 md:text-[48px]/12 lg:text-[56px]/[1.1] font-bold text-news-title mb-4"
+            >
+                {title}
+            </h1>
+
+            <p class="text-lg md:text-xl text-news-text mb-6">
+                {description}
+            </p>
+
+            <!-- Metadata -->
+            <div
+                class="flex flex-wrap gap-4 md:gap-8 text-news-label border-t border-b border-gray-300 py-4"
+            >
+                <div class="flex items-center gap-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <time datetime={pubDate.toISOString()}>
+                        {formattedDate}
+                    </time>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"
+                        ></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <address class="not-italic">
+                        {author}
+                    </address>
+                </div>
+            </div>
+        </header>
+
+        <!-- Article Content -->
+        <div class="prose prose-lg max-w-none text-news-text">
+            <Content />
+        </div>
+
+        <!-- Back to news button -->
+        <footer class="mt-12 pt-8 border-t border-gray-300">
+            <a
+                href="/noticias"
+                class="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors font-semibold"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+                Volver a todas las noticias
+            </a>
+        </footer>
+    </article>
 </Layout>

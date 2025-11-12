@@ -7,7 +7,7 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://alianzaemprende.pages.dev', // Cambia esto a tu URL real
+    site: 'http://localhost:4321',
     vite: {
         plugins: [tailwindcss()]
     },

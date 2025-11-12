@@ -1,30 +1,21 @@
 ---
-import BlobBackground from '@/components/BlobBackground.astro';
-import Layout from '@layouts/Layout.astro';
+import BlobBackground from "@/components/BlobBackground.astro";
+import NewsCard from "@/components/NewsCard.astro";
+import FeaturedNewsCard from "@/components/FeaturedNewsCard.astro";
+import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
-const allNews = await getCollection('news');
-const noticias = [...new Set(allNews.sort((news_a, news_b) => news_a.data.pubDate.getTime() - news_b.data.pubDate.getTime()).flat())];
+const allNews = await getCollection("news");
+const noticias = allNews.sort(
+    (news_a, news_b) =>
+        news_b.data.pubDate.getTime() - news_a.data.pubDate.getTime(),
+);
 
-// Fechas de las noticias
+// Ultimas 4 noticias (las más recientes)
+const ultimasNoticias = noticias.slice(0, 4);
 
-// 1. Define las opciones de formato
-const options: Intl.DateTimeFormatOptions = {
-  day: '2-digit',
-  month: '2-digit',
-  year: '2-digit',
-  timeZone: 'UTC'
-};
-
-// Selector de página
-
-// Ultimas 3 noticias (las más recientes).
-
-const ultimaNoticia = noticias.shift();
-
-const ultimasNoticias = noticias.splice(0, 3);
-
-// dividimos el resto de noticias en grupos de a 6
+// El resto de noticias
+const restoNoticias = noticias.slice(4);
 
 const pageTitle = "Noticias AlianzaEmprende";
 ---
@@ -32,126 +23,42 @@ const pageTitle = "Noticias AlianzaEmprende";
 <Layout title={pageTitle}>
     <BlobBackground />
     <div class="mx-auto my-8 lg:w-[80vw] w-[92vw]">
-
         <h1 class="text-[64px] font-bold mb-10">Noticias</h1>
 
-        <!-- Últimas 4 noticias -->
-        <div class="lg:flex lg:flex-row gap-15">
-            <div class="lg:w-[150%] mb-5">
-                <img class=
-                "md:w-auto h-auto lg:mx-auto rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.30)]
-                md:object-cover
-                " 
-                src={new URL(`/noticias/og/${ultimaNoticia.slug}.png`, Astro.site).toString()} />
-                <h2 class="
-                text-[32px]/9 md:text-[42px]/12 group-first:font-bold 
-                font-semibold text-news-title my-5
-                ">
-                    <a href={`/noticias/${ultimaNoticia.slug}`}>{ultimaNoticia.data.title}</a>
-                </h2>
-                <p class="md:text-[20px] text-[18px] my-1.5 text-news-text">{ultimaNoticia.data.description}</p>
-                <div class="flex justify-between">
-                    <p>
-                    <span class="text-news-label">Fecha:</span> <span>{
-                        new Intl.DateTimeFormat('es-CL', options).format(ultimaNoticia.data.pubDate).replace(/\//g, '-')
-                        }</span>
-                    </p>
-                    <p><span class="text-news-label">Autor: </span>{ultimaNoticia.data.author}</p>
-                </div>
-                <hr class="md:hidden text-gray-300 my-2"/>
-            </div>
-            <div>
-                {ultimasNoticias.map((news) => {
-                    return (
-                        <div
-                        class="
-                            flex
-                            flex-col
-                            md:flex-row
-                            md:items-start
-                            gap-2
-                            md:gap-8
-                            mb-5
-                            md:mb-9
-                            "
-                        >
-                            <img class=
-                            "md:w-[38%] lg:w-[40%] h-auto lg:mx-auto rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.30)]
-                            md:object-cover self-center
-                            " 
-                            src={new URL(`/noticias/og/${news.slug}.png`, Astro.site).toString()} />
-                            <div class="mt-4 md:mt-0">
-                                <h2 class="
-                                font-semibold text-[24px]/8 md:text-[32px]/9 text-news-title
-                                ">
-                                <a href={`/noticias/${news.slug}`}>{news.data.title}</a>
-                                </h2>
-                                <p class="text-news-text">{news.data.description}</p>
-                                <div class="flex justify-between">
-                                    <p>
-                                    <span class="text-news-label">Fecha:</span> <span>{
-                                        new Intl.DateTimeFormat('es-ES', options).format(news.data.pubDate).replace(/\//g, '-')
-                                        }</span>
-                                    </p>
-                                    <p><span class="text-news-label">Autor: </span>{news.data.author}</p>
-                                </div>
-                            </div>
-                            <hr class="text-gray-300 my-2"/>
-                        </div>
-                    )
-                })}
-            </div>
-        </div>
-        <hr class="invisible lg:visible text-gray-300 my-2"/>
-
-        <div class="
-            grid
-            grid-cols-1
-            lg:grid-cols-2 lg:gap-x-10
-            gap-4
-            mx-2.5
-            lg:mt-15
-            "
+        <!-- Últimas 4 noticias: layout especial -->
+        <div
+            class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 gap-6 lg:gap-8 mb-10"
         >
-            {noticias.map((news) => {
-                return (
-                <div
-                class="
-                    flex
-                    flex-col
-                    md:flex-row
-                    md:items-center
-                    gap-2
-                    md:gap-8
-                    my-3
-                    "
-                >
-                    <img class=
-                    "md:w-[38%] lg:w-[40%] h-auto lg:mx-auto rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.30)]
-                    md:object-cover
-                    " 
-                    src={new URL(`/noticias/og/${news.slug}.png`, Astro.site).toString()} />
+            <!-- Primera noticia: ocupa todas las filas de la columna 1 -->
+            <div class="lg:row-span-3">
+                {
+                    ultimasNoticias[0] && (
+                        <FeaturedNewsCard news={ultimasNoticias[0]} />
+                    )
+                }
+            </div>
+
+            <!-- Noticias 2, 3 y 4: cada una ocupa una fila de la columna 2 -->
+            {
+                ultimasNoticias.slice(1, 4).map((news) => (
                     <div>
-                        <h2 class="
-                        font-semibold text-[24px]/8 md:text-[32px]/9 text-news-title
-                        ">
-                        <a href={`/noticias/${news.slug}`}>{news.data.title}</a>
-                        </h2>
-                        <p class="text-news-text">{news.data.description}</p>
-                        <div class="flex justify-between">
-                            <p>
-                            <span class="text-news-label">Fecha:</span> <span>{
-                                new Intl.DateTimeFormat('es-CL', options).format(news.data.pubDate).replace(/\//g, '-')
-                                }</span>
-                            </p>
-                            <p><span class="text-news-label">Autor: </span>{news.data.author}</p>
-                        </div>
+                        <NewsCard news={news} />
                     </div>
-                    <hr class=" text-gray-300 mt-2"/>
-                </div>
-                );
-            })}
+                ))
+            }
+        </div>
+
+        <hr class="text-gray-300 my-8" />
+
+        <!-- Resto de noticias -->
+        <div
+            class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-10 gap-4 mx-2.5 lg:mt-15"
+        >
+            {
+                restoNoticias.map((news) => (
+                    <NewsCard news={news} containerClass="my-3" />
+                ))
+            }
         </div>
     </div>
-    
 </Layout>
