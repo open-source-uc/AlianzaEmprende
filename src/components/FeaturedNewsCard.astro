@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+    news: CollectionEntry<"news">;
+}
+
+const { news } = Astro.props;
+
+const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return text;
+    return text.slice(0, maxLength).trim() + "...";
+};
+
+const options: Intl.DateTimeFormatOptions = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    timeZone: "UTC",
+};
+
+const formattedDate = new Intl.DateTimeFormat("es-CL", options)
+    .format(news.data.pubDate)
+    .replace(/\//g, "-");
+
+const ogImageUrl = new URL(
+    `/noticias/og/${news.slug}.png`,
+    Astro.site,
+).toString();
+
+const truncatedTitle = truncateText(news.data.title, 100);
+const truncatedDescription = truncateText(news.data.description, 150);
+---
+
+<article class="flex flex-col h-full">
+    <a href={`/noticias/${news.slug}`} class="block">
+        <img
+            class="w-full h-auto rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.30)] object-cover mb-5"
+            src={ogImageUrl}
+            alt={news.data.title}
+        />
+    </a>
+    <div class="flex-1 flex flex-col">
+        <h2
+            class="text-[32px]/9 md:text-[42px]/12 font-bold text-news-title my-5"
+        >
+            <a href={`/noticias/${news.slug}`}>{truncatedTitle}</a>
+        </h2>
+        <p class="md:text-[20px] text-[18px] my-1.5 text-news-text flex-1">
+            {truncatedDescription}
+        </p>
+        <footer class="flex justify-between mt-4">
+            <time datetime={news.data.pubDate.toISOString()}>
+                <span class="text-news-label">Fecha:</span>
+                {formattedDate}
+            </time>
+            <address class="not-italic">
+                <span class="text-news-label">Autor: </span>{news.data.author}
+            </address>
+        </footer>
+    </div>
+</article>

@@ -1,0 +1,64 @@
+---
+import BlobBackground from "@/components/BlobBackground.astro";
+import NewsCard from "@/components/NewsCard.astro";
+import FeaturedNewsCard from "@/components/FeaturedNewsCard.astro";
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const allNews = await getCollection("news");
+const noticias = allNews.sort(
+    (news_a, news_b) =>
+        news_b.data.pubDate.getTime() - news_a.data.pubDate.getTime(),
+);
+
+// Ultimas 4 noticias (las más recientes)
+const ultimasNoticias = noticias.slice(0, 4);
+
+// El resto de noticias
+const restoNoticias = noticias.slice(4);
+
+const pageTitle = "Noticias AlianzaEmprende";
+---
+
+<Layout title={pageTitle}>
+    <BlobBackground />
+    <div class="mx-auto my-8 lg:w-[80vw] w-[92vw]">
+        <h1 class="text-[64px] font-bold mb-10">Noticias</h1>
+
+        <!-- Últimas 4 noticias: layout especial -->
+        <div
+            class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 gap-6 lg:gap-8 mb-10"
+        >
+            <!-- Primera noticia: ocupa todas las filas de la columna 1 -->
+            <div class="lg:row-span-3">
+                {
+                    ultimasNoticias[0] && (
+                        <FeaturedNewsCard news={ultimasNoticias[0]} />
+                    )
+                }
+            </div>
+
+            <!-- Noticias 2, 3 y 4: cada una ocupa una fila de la columna 2 -->
+            {
+                ultimasNoticias.slice(1, 4).map((news) => (
+                    <div>
+                        <NewsCard news={news} />
+                    </div>
+                ))
+            }
+        </div>
+
+        <hr class="text-gray-300 my-8" />
+
+        <!-- Resto de noticias -->
+        <div
+            class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-10 gap-4 mx-2.5 lg:mt-15"
+        >
+            {
+                restoNoticias.map((news) => (
+                    <NewsCard news={news} containerClass="my-3" />
+                ))
+            }
+        </div>
+    </div>
+</Layout>
