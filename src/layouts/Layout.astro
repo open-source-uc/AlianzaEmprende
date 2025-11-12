@@ -21,7 +21,7 @@ const { title = "Alianza Emprende", description, classname } = Astro.props;
         <meta name="description" content={description} />
         <slot name="head" />
     </head>
-    <body class=`relative ${classname}` }>
+    <body class={`relative ${classname}`}>
         <Header />
         <slot />
         <Footer />
