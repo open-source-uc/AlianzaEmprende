@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+    event: CollectionEntry<"events">;
+    containerClass?: string;
+}
+
+const { event, containerClass = "" } = Astro.props;
+
+function formatDate(date: Date): string {
+    return new Date(date).toLocaleDateString("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+}
+---
+
+<article
+    class={`bg-white border border-gray-200 rounded-lg p-6 ${containerClass}`}
+>
+    <a href={`/eventos/${event.slug}`} class="block">
+        <h2 class="text-2xl font-bold mb-3">
+            {event.data.title}
+        </h2>
+
+        <div class="flex flex-col gap-2 text-base text-gray-600">
+            <time datetime={event.data.date.toISOString()}>
+                📅 {formatDate(event.data.date)}
+            </time>
+            <address class="not-italic">
+                📍 {event.data.place}
+            </address>
+        </div>
+    </a>
+</article>

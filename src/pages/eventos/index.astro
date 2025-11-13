@@ -1,0 +1,93 @@
+---
+import BlobBackground from "@/components/BlobBackground.astro";
+import EventCard from "@/components/EventCard.astro";
+import FeaturedEventCard from "@/components/FeaturedEventCard.astro";
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const allEvents = await getCollection("events");
+
+// Fecha actual para comparar
+const now = new Date();
+
+// Separar eventos futuros y pasados
+const eventosFuturos = allEvents
+    .filter((event) => event.data.date >= now)
+    .sort((a, b) => a.data.date.getTime() - b.data.date.getTime()); // Ascendente (próximo primero)
+
+const eventosPasados = allEvents
+    .filter((event) => event.data.date < now)
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()); // Descendente (más reciente primero)
+
+// Próximo evento (el más cercano en el futuro)
+const proximoEvento = eventosFuturos[0];
+
+// Resto de eventos futuros
+const restoEventosFuturos = eventosFuturos.slice(1);
+
+const pageTitle = "Eventos AlianzaEmprende";
+---
+
+<Layout title={pageTitle}>
+    <BlobBackground />
+    <div class="mx-auto my-8 lg:w-[80vw] w-[92vw]">
+        <h1 class="text-[64px] font-bold mb-10">Eventos</h1>
+
+        <!-- Próximo evento destacado -->
+        {
+            proximoEvento ? (
+                <div class="mb-10">
+                    <FeaturedEventCard event={proximoEvento} />
+                </div>
+            ) : (
+                <div class="mb-10 p-8 bg-gray-100 rounded-lg text-center">
+                    <p class="text-xl text-gray-600">
+                        No hay eventos programados próximamente. ¡Mantente
+                        atento!
+                    </p>
+                </div>
+            )
+        }
+
+        <!-- Resto de eventos futuros -->
+        {
+            restoEventosFuturos.length > 0 && (
+                <>
+                    <hr class="text-gray-300 my-8" />
+                    <div class="mb-10">
+                        <h2 class="text-2xl font-bold mb-6 text-gray-700">
+                            Próximos Eventos
+                        </h2>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {restoEventosFuturos.map((event) => (
+                                <EventCard event={event} />
+                            ))}
+                        </div>
+                    </div>
+                </>
+            )
+        }
+
+        <!-- Eventos pasados -->
+        {
+            eventosPasados.length > 0 && (
+                <>
+                    <hr class="text-gray-300 my-8" />
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold mb-6 text-gray-700">
+                            Eventos Pasados
+                        </h2>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {eventosPasados.map((event) => (
+                                <EventCard
+                                    event={event}
+                                    containerClass="opacity-75"
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </>
+            )
+        }
+    </div>
+</Layout>

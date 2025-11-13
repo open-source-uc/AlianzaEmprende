@@ -1,0 +1,67 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+    event: CollectionEntry<"events">;
+}
+
+const { event } = Astro.props;
+
+function formatDate(date: Date): string {
+    return new Date(date).toLocaleDateString("es-ES", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+}
+
+function formatTime(date: Date): string {
+    return new Date(date).toLocaleTimeString("es-ES", {
+        hour: "2-digit",
+        minute: "2-digit",
+    });
+}
+---
+
+<article
+    class="bg-gray-50 rounded-lg p-8 mb-8 border border-gray-200 shadow-md group"
+>
+    <a href={`/eventos/${event.slug}`} class="block">
+        <div class="mb-4">
+            <span
+                class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-1.5 rounded-md"
+            >
+                Próximo Evento
+            </span>
+        </div>
+
+        <h2
+            class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 group-hover:text-blue-600"
+        >
+            {event.data.title}
+        </h2>
+
+        <div class="flex flex-col gap-3 text-lg text-gray-700">
+            <time
+                datetime={event.data.date.toISOString()}
+                class="flex items-start gap-2"
+            >
+                <span class="text-2xl">📅</span>
+                <div class="flex flex-col">
+                    <span class="font-semibold capitalize">
+                        {formatDate(event.data.date)}
+                    </span>
+                    <span class="text-base text-gray-600">
+                        {formatTime(event.data.date)} hrs
+                    </span>
+                </div>
+            </time>
+
+            <address class="not-italic flex items-start gap-2">
+                <span class="text-2xl">📍</span>
+                <span class="font-medium">{event.data.place}</span>
+            </address>
+        </div>
+    </a>
+</article>

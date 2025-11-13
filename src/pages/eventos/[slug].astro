@@ -4,52 +4,48 @@ import Layout from "../../layouts/Layout.astro";
 import BlobBackground from "@/components/BlobBackground.astro";
 
 export async function getStaticPaths() {
-    const news = await getCollection("news");
-    return news.map((noticia) => ({
-        params: { slug: noticia.slug },
-        props: { noticia },
+    const events = await getCollection("events");
+    return events.map((evento) => ({
+        params: { slug: evento.slug },
+        props: { evento },
     }));
 }
 
-const options: Intl.DateTimeFormatOptions = {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-    timeZone: "UTC",
-};
+const { evento } = Astro.props;
+const { data } = evento;
+const { title, date, place } = data;
+const { Content } = await render(evento);
 
-const { noticia } = Astro.props;
-const { data } = noticia;
-const { title, author, pubDate, description } = data;
-const { Content } = await render(noticia);
+const eventDate = new Date(date);
 
-const formattedDate = new Intl.DateTimeFormat("es-CL", options)
-    .format(pubDate)
-    .replace(/\//g, "-");
+function formatDate(date: Date): string {
+    return date.toLocaleDateString("es-ES", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+}
 
-const ogImageUrl = new URL(
-    `/noticias/og/${noticia.slug}.png`,
-    Astro.site,
-).toString();
+function formatTime(date: Date): string {
+    return date.toLocaleTimeString("es-ES", {
+        hour: "2-digit",
+        minute: "2-digit",
+    });
+}
+
+const formattedDate = formatDate(eventDate);
+const formattedTime = formatTime(eventDate);
 ---
 
 <Layout title={title}>
-    <meta slot="head" property="og:title" content={title} />
-    <meta slot="head" property="og:description" content={description} />
-    <meta slot="head" property="og:image" content={ogImageUrl} />
-    <meta slot="head" property="og:type" content="article" />
-    <meta slot="head" name="twitter:card" content="summary_large_image" />
-    <meta slot="head" name="twitter:title" content={title} />
-    <meta slot="head" name="twitter:description" content={description} />
-    <meta slot="head" name="twitter:image" content={ogImageUrl} />
-
     <BlobBackground dissableMiddleBlob />
 
     <article class="mx-auto my-8 lg:w-[65vw] w-[92vw]">
         <!-- Breadcrumb / Back navigation -->
         <nav class="mb-6" aria-label="Breadcrumb">
             <a
-                href="/noticias"
+                href="/eventos"
                 class="text-gray-600 hover:text-black transition-colors inline-flex items-center gap-2"
             >
                 <svg
@@ -65,85 +61,90 @@ const ogImageUrl = new URL(
                 >
                     <path d="m15 18-6-6 6-6"></path>
                 </svg>
-                Volver a Noticias
+                Volver a Eventos
             </a>
         </nav>
 
-        <!-- Hero Image -->
-        <figure class="mb-8">
-            <img
-                src={ogImageUrl}
-                alt={title}
-                class="w-full h-auto rounded-xl shadow-lg object-cover"
-            />
-        </figure>
-
-        <!-- Article Header -->
+        <!-- Event Header -->
         <header class="mb-8">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            <div class="mb-4">
+                <span
+                    class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-1.5 rounded-md"
+                >
+                    Evento
+                </span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                 {title}
             </h1>
 
-            <p class="text-lg md:text-xl text-gray-700 mb-6">
-                {description}
-            </p>
-
-            <!-- Metadata -->
-            <div
-                class="flex flex-wrap gap-4 md:gap-8 text-gray-600 border-t border-b border-gray-200 py-4"
-            >
-                <div class="flex items-center gap-2">
+            <!-- Event Metadata -->
+            <div class="flex flex-col gap-4 text-lg text-gray-700 mb-8">
+                <div class="flex items-start gap-3">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
+                        width="24"
+                        height="24"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
+                        class="shrink-0 mt-1"
                     >
                         <circle cx="12" cy="12" r="10"></circle>
                         <polyline points="12 6 12 12 16 14"></polyline>
                     </svg>
-                    <time datetime={pubDate.toISOString()}>
-                        {formattedDate}
-                    </time>
+                    <div class="flex flex-col">
+                        <time
+                            datetime={eventDate.toISOString()}
+                            class="font-semibold capitalize"
+                        >
+                            {formattedDate}
+                        </time>
+                        <span class="text-base text-gray-600">
+                            {formattedTime} hrs
+                        </span>
+                    </div>
                 </div>
 
-                <div class="flex items-center gap-2">
+                <div class="flex items-start gap-3">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
+                        width="24"
+                        height="24"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
+                        class="shrink-0 mt-1"
                     >
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"
+                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
                         ></path>
-                        <circle cx="12" cy="7" r="4"></circle>
+                        <circle cx="12" cy="10" r="3"></circle>
                     </svg>
-                    <address class="not-italic">
-                        {author}
+                    <address class="not-italic font-medium">
+                        {place}
                     </address>
                 </div>
             </div>
+
+            <hr class="border-gray-200" />
         </header>
 
-        <!-- Article Content -->
+        <!-- Event Content -->
         <div class="markdown text-lg max-w-none">
             <Content />
         </div>
 
-        <!-- Back to news button -->
+        <!-- Back to events button -->
         <footer class="mt-12 pt-8 border-t border-gray-200">
             <a
-                href="/noticias"
+                href="/eventos"
                 class="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
             >
                 <svg
@@ -159,7 +160,7 @@ const ogImageUrl = new URL(
                 >
                     <path d="m15 18-6-6 6-6"></path>
                 </svg>
-                Volver a todas las noticias
+                Volver a todos los eventos
             </a>
         </footer>
     </article>
