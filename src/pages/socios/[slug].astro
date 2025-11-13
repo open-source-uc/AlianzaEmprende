@@ -1,0 +1,160 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import BlobBackground from "@/components/BlobBackground.astro";
+
+export async function getStaticPaths() {
+    const partners = await getCollection("partners");
+    return partners.map((partner) => ({
+        params: { slug: partner.slug },
+        props: { partner },
+    }));
+}
+
+const { partner } = Astro.props;
+const { name, logo, website, socials } = partner.data;
+const { Content } = await render(partner);
+---
+
+<Layout title={name}>
+    <BlobBackground dissableMiddleBlob />
+
+    <article class="mx-auto my-8 lg:w-[65vw] w-[92vw]">
+        <!-- Breadcrumb / Back navigation -->
+        <nav class="mb-6" aria-label="Breadcrumb">
+            <a
+                href="/socios"
+                class="text-gray-600 hover:text-black transition-colors inline-flex items-center gap-2"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+                Volver a Socios
+            </a>
+        </nav>
+
+        <!-- Partner Logo -->
+        <figure class="mb-8 flex justify-center">
+            <img
+                src={logo}
+                alt={name}
+                class="max-h-40 w-auto object-contain rounded-xl shadow-lg"
+            />
+        </figure>
+
+        <!-- Partner Header -->
+        <header class="mb-8">
+            <h1
+                class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center"
+            >
+                {name}
+            </h1>
+
+            <!-- Partner Links and Social Media -->
+            <div
+                class="flex flex-col items-center gap-4 border-t border-b border-gray-200 py-6"
+            >
+                {
+                    website && (
+                        <div class="flex items-center gap-2">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                                <path d="M2 12h20" />
+                            </svg>
+                            <a
+                                href={website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-blue-600 hover:text-blue-800 transition-colors font-medium"
+                            >
+                                Visitar sitio web
+                            </a>
+                        </div>
+                    )
+                }
+
+                {
+                    socials && Object.entries(socials).length > 0 && (
+                        <div class="flex flex-wrap gap-4 justify-center">
+                            <span class="text-gray-600 font-medium">
+                                Redes sociales:
+                            </span>
+                            {Object.entries(socials).map(([platform, url]) => (
+                                <a
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-gray-600 hover:text-black transition-colors capitalize inline-flex items-center gap-1"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                                    </svg>
+                                    {platform}
+                                </a>
+                            ))}
+                        </div>
+                    )
+                }
+            </div>
+        </header>
+
+        <!-- Partner Content -->
+        <div class="markdown text-lg max-w-none">
+            <Content />
+        </div>
+
+        <!-- Back to partners button -->
+        <footer class="mt-12 pt-8 border-t border-gray-200">
+            <a
+                href="/socios"
+                class="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+                Volver a todos los socios
+            </a>
+        </footer>
+    </article>
+</Layout>
