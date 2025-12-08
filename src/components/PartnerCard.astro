@@ -17,7 +17,8 @@ const truncatedName = truncateText(partner.data.name, 50);
 ---
 
 <article
-    class={`flex flex-col items-center p-6 bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.15)] justify-around ${containerClass}`}
+    class={`flex flex-col items-center p-6 bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.15)] justify-around 
+    transition-transform duration-300 hover:scale-105 ${containerClass}`}
 >
     <a
         href={`/socios/${partner.slug}`}
@@ -27,7 +28,7 @@ const truncatedName = truncateText(partner.data.name, 50);
             class="w-full h-32 flex items-center justify-center mb-4 bg-gray-50 rounded-lg"
         >
             <img
-                class="max-h-24 max-w-full object-contain"
+                class="h-24 w-24 rounded-full object-contain"
                 src={partner.data.logo}
                 alt={partner.data.name}
                 loading="lazy"
