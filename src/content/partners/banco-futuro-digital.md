@@ -1,6 +1,10 @@
 ---
-name: "Partner Lorem Ipsum 5"
-logo: "https://picsum.photos/1080/1080"
+name: "Injenia Hub"
+logo: "https://media.licdn.com/dms/image/v2/D4E0BAQHmIGL71hmqbw/company-logo_200_200/B4EZinC.T.GYAM-/0/1755149231918?e=2147483647&v=beta&t=RD92pIzwcXdFL3zyjMR4d2UhyQNE1ibFnntN5KyDnVA"
+website: "https://lorem-ipsum-5.com"
+socials:
+    linkedin: "https://www.linkedin.com/company/injenia-hub/"
+    instagram: "https://www.instagram.com/injeniahub.fcfm/"
 ---
 
 # Sed Ut Perspiciatis Unde

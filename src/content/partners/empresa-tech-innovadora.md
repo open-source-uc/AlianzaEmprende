@@ -1,10 +1,10 @@
 ---
-name: "Partner Lorem Ipsum 1"
-logo: "https://picsum.photos/1081/1080"
+name: "UNITE"
+logo: "https://media.licdn.com/dms/image/v2/D4D0BAQEcjtJO-PO-kA/company-logo_200_200/company-logo_200_200/0/1715160770698?e=2147483647&v=beta&t=lQxXm7PXHExK6DF3nYuuYsMkuxbQ82EPZj1NuEEkcX8"
 website: "https://lorem-ipsum-1.com"
 socials:
-  linkedin: "https://linkedin.com/company/lorem-ipsum-1"
-  twitter: "https://twitter.com/loremipsum1"
+  linkedin: "https://www.linkedin.com/company/unite-uc/"
+  instagram: "https://www.instagram.com/unite_uc/"
 ---
 
 ## Lorem Ipsum Dolor

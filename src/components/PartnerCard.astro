@@ -17,14 +17,14 @@ const truncatedName = truncateText(partner.data.name, 50);
 ---
 
 <article
-    class={`flex flex-col items-center p-6 bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.15)] justify-around ${containerClass}`}
+    class={`flex flex-col items-center p-6 bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.15)] justify-around ${containerClass} transition hover:scale-103`}
 >
     <a
         href={`/socios/${partner.slug}`}
         class="w-full flex flex-col items-center"
     >
         <div
-            class="w-full h-32 flex items-center justify-center mb-4 bg-gray-50 rounded-lg"
+            class="w-full h-32 flex items-center justify-center mb-4 bg-gray-100 rounded-lg"
         >
             <img
                 class="max-h-24 max-w-full object-contain"

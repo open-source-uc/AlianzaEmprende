@@ -1,6 +1,10 @@
 ---
-name: "Partner Lorem Ipsum 2"
-logo: "https://via.placeholder.com/200x100/FF6B35/ffffff?text=Partner+2"
+name: "Club de Emprendedores"
+logo: "https://media.licdn.com/dms/image/v2/D4E0BAQEiDzCq883hig/company-logo_200_200/B4EZXppEPtGYAI-/0/1743381612340/clubdemprendedores_logo?e=2147483647&v=beta&t=5-oM4oLtRrxaokL-kmk61y2RO7qy3eRNTUI4uEarXa0"
+website: "https://lorem-ipsum-2.com"
+socials:
+    linkedin: "https://www.linkedin.com/company/clubdemprendedores"
+    instagram: "https://www.instagram.com/clube_uai/"
 ---
 
 # Lorem Ipsum Dolor Sit

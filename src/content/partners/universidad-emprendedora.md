@@ -5,7 +5,6 @@ website: "https://lorem-ipsum-3.com"
 socials:
   linkedin: "https://linkedin.com/company/lorem-ipsum-3"
   instagram: "https://instagram.com/loremipsum3"
-  youtube: "https://youtube.com/c/LoremIpsum3"
 ---
 
 # At Vero Eos Et Accusamus

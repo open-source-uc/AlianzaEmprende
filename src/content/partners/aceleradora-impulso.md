@@ -1,6 +1,10 @@
 ---
-name: "Partner Lorem Ipsum 4"
-logo: "https://picsum.photos/1920/1080"
+name: "Club Emprende Valdivia"
+logo: "https://media.licdn.com/dms/image/v2/D4E0BAQFZhiX_KIHpjw/company-logo_200_200/B4EZibVJJDHEAI-/0/1754952668269?e=2147483647&v=beta&t=WPkZEuoTtIXULNwbvoKKf4GGCVzCvKef3MERd9Qfb7A"
+website: "https://lorem-ipsum-4.com"
+socials:
+    linkedin: "https://www.linkedin.com/company/club-emprende-valdivia"
+    instagram: "https://www.instagram.com/clubemprendevaldivia/"
 ---
 
 # Lorem Ipsum Dolor Sit Amet
