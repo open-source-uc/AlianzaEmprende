@@ -25,19 +25,19 @@ function formatTime(date: Date): string {
 ---
 
 <article
-    class="bg-gray-50 rounded-lg p-8 mb-8 border border-gray-200 shadow-md group"
+    class="bg-gray-50 rounded-lg p-8 mb-8 border border-gray-200 shadow-md group transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-500"
 >
     <a href={`/eventos/${event.slug}`} class="block">
         <div class="mb-4">
             <span
-                class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-1.5 rounded-md"
+                class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-1.5 rounded-md hover:bg-blue-800 transition-colors duration-300"
             >
                 Próximo Evento
             </span>
         </div>
 
         <h2
-            class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 group-hover:text-blue-600"
+            class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 group-hover:text-blue-900 transition-colors duration-300"
         >
             {event.data.title}
         </h2>
