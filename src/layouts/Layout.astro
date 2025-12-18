@@ -17,7 +17,8 @@ const { title = "Alianza Emprende", description, classname } = Astro.props;
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{title}</title>
+		<link rel="icon" href="/favicon.svg" type="image/svg+html" />
+		<title>{title}</title>
         <meta name="description" content={description} />
         <slot name="head" />
     </head>
