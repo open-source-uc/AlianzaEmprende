@@ -1,5 +1,9 @@
 ---
-// Componente de fondo con esferas difuminadas (blobs) - Completamente estático
+interface Props {
+    dissableMiddleBlob?: boolean;
+}
+
+const { dissableMiddleBlob = false } = Astro.props;
 ---
 
 <div
@@ -35,9 +39,12 @@
     </div>
 
     <!-- Esfera central (#4F8FE2 más suave) -->
-    <div
-        class="absolute w-[350px] h-[350px] md:w-[550px] md:h-[550px] lg:w-[700px] lg:h-[700px] rounded-full blur-[50px] md:blur-[65px] lg:blur-[80px] opacity-40 left-1/2 -translate-x-1/2"
-        style="background: radial-gradient(circle, rgba(79, 143, 226, 1) 0%, rgba(79, 143, 226, 0) 70%); top: 30%; md:top: 40%;"
-    >
-    </div>
+    {
+        !dissableMiddleBlob && (
+            <div
+                class="absolute w-[350px] h-[350px] md:w-[550px] md:h-[550px] lg:w-[700px] lg:h-[700px] rounded-full blur-[50px] md:blur-[65px] lg:blur-[80px] opacity-40 left-1/2 -translate-x-1/2"
+                style="background: radial-gradient(circle, rgba(79, 143, 226, 1) 0%, rgba(79, 143, 226, 0) 70%); top: 30%; md:top: 40%;"
+            ></div>
+        )
+    }
 </div>

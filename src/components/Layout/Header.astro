@@ -1,5 +1,6 @@
 ---
 import ButtonLink from "../ButtonLink.astro";
+import AlianzaEmprendeLogo from "@components/Icons/AlianzaEmpresaIcon.astro"
 ---
 
 <header
@@ -12,24 +13,23 @@ import ButtonLink from "../ButtonLink.astro";
         <input
             type="checkbox"
             id="menu-toggle"
-            class="hidden peer/menu-toggle"
+            class="hidden peer/menu-toggle menu-toggle"
         />
         <div>
-            <!-- logo temporal hasta tener una de mejor calidad -->
-            <a href="/">
-                <img src="/logo-placeholder.png" alt="Logo" class="size-14" />
+			<a href="/">
+				<AlianzaEmprendeLogo className="h-10 w-auto" />
             </a>
-        </div>
+		</div>
         <nav
-            class="fixed md:static top-0 -right-full md:right-0 h-screen md:h-auto w-4/5 md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none transition-all duration-300 ease-in-out peer-checked/menu-toggle:right-0 z-40"
-        >
+    class="fixed md:static top-0 -right-full md:right-0 h-screen md:h-auto w-full md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none transition-all duration-300 ease-in-out peer-checked/menu-toggle:right-0 z-40"
+>
             <ul
                 class="flex flex-col font-medium md:flex-row gap-6 md:gap-12 p-6 md:p-0 pt-20 md:pt-0 [&>li>a]:transition [&>li>a]:hover:text-blue-500 [&>li>a]:block [&>li>a]:py-2 md:[&>li>a]:py-0 [&>li>a]:text-xl md:[&>li>a]:text-lg"
             >
                 <li><a href="/noticias">Noticias</a></li>
                 <li><a href="/eventos">Eventos</a></li>
-                <li><a href="/recursos">Recursos</a></li>
-                <li><a href="/about">Acerca</a></li>
+                <li><a href="/socios">Socios</a></li>
+                <li><a href="/acerca">Acerca</a></li>
                 <ButtonLink
                     label="Sé Parte"
                     href="/join"
@@ -58,6 +58,7 @@ import ButtonLink from "../ButtonLink.astro";
 
 <script>
     const header = document.getElementById("main-header");
+	const menuToggle = document.getElementById("menu-toggle");
 
     function handleScroll() {
         if (window.scrollY > 50) {
@@ -67,8 +68,19 @@ import ButtonLink from "../ButtonLink.astro";
             header?.classList.add("bg-transparent");
             header?.classList.remove("bg-white", "shadow-md");
         }
+	}
+
+	 function handleMenuToggle() {
+        if (menuToggle?.checked) {
+            document.body.classList.add("overflow-hidden");
+        } else {
+            document.body.classList.remove("overflow-hidden");
+        }
     }
 
+
+
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
+	window.addEventListener("scroll", handleScroll);
+	menuToggle?.addEventListener("change", handleMenuToggle);
 </script>

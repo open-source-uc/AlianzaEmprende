@@ -1,0 +1,45 @@
+---
+import BlobBackground from "@/components/BlobBackground.astro";
+import PartnerCard from "@/components/PartnerCard.astro";
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const allPartners = await getCollection("partners");
+const partners = allPartners.sort((a, b) =>
+    a.data.name.localeCompare(b.data.name),
+);
+
+const pageTitle = "Socios AlianzaEmprende";
+---
+
+<Layout title={pageTitle}>
+    <BlobBackground />
+    <div class="mx-auto my-8 lg:w-[80vw] w-[92vw]">
+        <h1 class="text-[64px] font-bold mb-10">Socios</h1>
+
+        <p class="text-xl text-gray-600 mb-10 max-w-3xl">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis
+            optio amet saepe non omnis, est cum natus, tempore, sequi laborum
+            reiciendis expedita blanditiis illo delectus sapiente fugit
+            perferendis eos voluptas.
+        </p>
+
+        <!-- Grid de socios -->
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        >
+            {partners.map((partner) => <PartnerCard partner={partner} />)}
+        </div>
+
+        {
+            partners.length === 0 && (
+                <div class="p-8 bg-gray-100 rounded-lg text-center">
+                    <p class="text-xl text-gray-600">
+                        Próximamente estaremos agregando más socios
+                        estratégicos. ¡Mantente atento!
+                    </p>
+                </div>
+            )
+        }
+    </div>
+</Layout>

@@ -1,0 +1,100 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+    partner: CollectionEntry<"partners">;
+    containerClass?: string;
+}
+
+const { partner, containerClass = "" } = Astro.props;
+
+const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return text;
+    return text.slice(0, maxLength).trim() + "...";
+};
+
+const truncatedName = truncateText(partner.data.name, 50);
+---
+
+<article
+    class={`flex flex-col items-center p-6 bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.15)] justify-around 
+    transition-transform duration-300 hover:scale-105 ${containerClass}`}
+>
+    <a
+        href={`/socios/${partner.slug}`}
+        class="w-full flex flex-col items-center"
+    >
+        <div
+            class="w-full h-32 flex items-center justify-center mb-4 bg-gray-50 rounded-lg"
+        >
+            <img
+                class="h-24 w-24 rounded-full object-contain"
+                src={partner.data.logo}
+                alt={partner.data.name}
+                loading="lazy"
+            />
+        </div>
+
+        <h2 class="font-semibold text-xl text-center text-gray-900 mb-3">
+            {truncatedName}
+        </h2>
+    </a>
+
+    <div class="w-full flex flex-col gap-3">
+        {
+            partner.data.website && (
+                <a
+                    href={partner.data.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                        <path d="M2 12h20" />
+                    </svg>
+                    Visitar sitio web
+                </a>
+            )
+        }
+
+        {
+            partner.data.socials &&
+                Object.entries(partner.data.socials).length > 0 && (
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        {Object.entries(partner.data.socials).map(
+                            ([platform, url]) => (
+                                <a
+                                    href={url as string}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-1 px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors capitalize"
+                                    title={`Ver en ${platform}`}
+                                >
+                                    {platform}
+                                </a>
+                            ),
+                        )}
+                    </div>
+                )
+        }
+    </div>
+
+    <a
+        href={`/socios/${partner.slug}`}
+        class="mt-4 w-full px-4 py-2 text-center bg-black text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
+    >
+        Ver más detalles
+    </a>
+</article>

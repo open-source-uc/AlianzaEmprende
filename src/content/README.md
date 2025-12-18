@@ -2,6 +2,8 @@
 
 Esta guía te ayudará a agregar y editar contenido en el sitio web de la Alianza Emprende. No necesitas saber programar, solo seguir estos ejemplos.
 
+> **¿No sabes donde escribir?** Te recomendamos la pagina [stackedit.io](https://stackedit.io/app#) para crear los archivos markdown.
+
 > **👨‍💻 ¿Eres desarrollador?** Si buscas información técnica sobre los schemas y la implementación, ve directamente a la [sección técnica al final de este documento](#-información-técnica-para-desarrolladores).
 
 ## ¿Cómo funciona?
@@ -34,10 +36,10 @@ Crea un archivo llamado `open-source-uc.md` con este contenido:
 
 ```markdown
 ---
-title: "Open Source UC"
-logo: "https://osuc.dev/logo.png"
-website: "https://osuc.dev"
-socials:
+title: "Open Source UC" (OBLIGATORIO)
+logo: "https://osuc.dev/logo.png" (OBLIGATORIO)
+website: "https://osuc.dev" (Opcional)
+socials: (Opcional)
   instagram: "https://instagram.com/osuc.dev"
   github: "https://github.com/open-source-uc"
 ---
@@ -73,12 +75,12 @@ title: "Lanzamiento de la Alianza"
 description: "Hoy lanzamos la primera versión de nuestra plataforma."
 pubDate: "2025-10-27"
 author: "Equipo Alianza"
+Contenido...
 ---
-
-¡Hoy es el gran día! Aquí va el contenido completo de la noticia.
-
-Puedes escribir varios párrafos, agregar enlaces, listas, etc.
 ```
+
+> [!NOTICE]
+> Todos los campos son obligatorios.
 
 -----
 
@@ -105,11 +107,11 @@ title: "Charla Introductoria a Astro"
 date: "2025-11-15"
 place: "Auditorio San Agustín, Campus San Joaquín"
 ---
-
-En esta charla aprenderemos los conceptos básicos de Astro.
-
-¡Todos están invitados! Inscripciones en el siguiente link: ...
+Contenido...
 ```
+
+> [!NOTICE]
+> Todos los campos son obligatorios.
 
 -----
 
